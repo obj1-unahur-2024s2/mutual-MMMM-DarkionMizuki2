@@ -22,4 +22,65 @@ p.ej. español o italiano." {
     const playaDe1000Metros=new ViajeDePlaya(idiomas=["español"],largo=1000)
     assert.that(playaDe1000Metros.esParaBrocearse())
   }
+  //EXCURSIÓN A CIUDAD
+  test "una excursión a ciudad normal (no tropical) en la que se visitan 4 atracciones, lleva 2 días."{
+    const unaEACNQueSeVisitan4Atracciones=new ExcursionACiudad(idiomas=["ingles"],cantidadDeAtraccionesQueSeVanAVisitar=4)
+    assert.equals(2,unaEACNQueSeVisitan4Atracciones.cuantosDiasLlevaLaActividad()) 
+  }
+  test "una excursión a ciudad normal (no tropical) en la que se visitan 4 atracciones, no implica esfuerzo"{
+    const unaEACNQueSeVisitan4Atracciones=new ExcursionACiudad(idiomas=["ingles"],cantidadDeAtraccionesQueSeVanAVisitar=4)
+    assert.notThat(unaEACNQueSeVisitan4Atracciones.implicaEsfuerzo()) 
+  }
+  test "una excursión a ciudad normal (no tropical) en la que se visitan 4 atracciones, no sirve para broncearse"{
+    const unaEACNQueSeVisitan4Atracciones=new ExcursionACiudad(idiomas=["ingles"],cantidadDeAtraccionesQueSeVanAVisitar=4)
+    assert.notThat(unaEACNQueSeVisitan4Atracciones.esParaBrocearse()) 
+  }
+  test "una excursión a ciudad tropical en la que se visitan 4 atracciones, lleva 3 días"{
+    const unaEACTQueSeVisitan4Atracciones=new ExcursionACiudadTropical(idiomas=["sueco"],cantidadDeAtraccionesQueSeVanAVisitar=4)
+    assert.equals(3,unaEACTQueSeVisitan4Atracciones.cuantosDiasLlevaLaActividad()) 
+  }
+  test "una excursión a ciudad tropical en la que se visitan 4 atracciones, no implica esfuerzo."{
+    const unaEACTQueSeVisitan4Atracciones=new ExcursionACiudadTropical(idiomas=["sueco"],cantidadDeAtraccionesQueSeVanAVisitar=4)
+    assert.notThat(unaEACTQueSeVisitan4Atracciones.implicaEsfuerzo())
+  }
+  test "una excursión a ciudad tropical en la que se visitan 4 atracciones, sí sirve para broncearse."{
+    const unaEACTQueSeVisitan4Atracciones=new ExcursionACiudadTropical(idiomas=["sueco"],cantidadDeAtraccionesQueSeVanAVisitar=4)
+    assert.that(unaEACTQueSeVisitan4Atracciones.esParaBrocearse())
+  }
+  test "una excursión a ciudad normal (no tropical) en la que se visitan 8 atracciones, lleva 4 días."{
+    const unaEACNQueSeVisitan8Atracciones=new ExcursionACiudad(idiomas=["español,guarani"],cantidadDeAtraccionesQueSeVanAVisitar=8)
+    assert.equals(4,unaEACNQueSeVisitan8Atracciones.cuantosDiasLlevaLaActividad()) 
+  }
+  test "una excursión a ciudad normal (no tropical) en la que se visitan 8 atracciones, implica esfuerzo."{
+    const unaEACNQueSeVisitan8Atracciones=new ExcursionACiudad(idiomas=["español,guarani"],cantidadDeAtraccionesQueSeVanAVisitar=8)
+    assert.that(unaEACNQueSeVisitan8Atracciones.implicaEsfuerzo())
+  }
+  test "una excursión a ciudad normal (no tropical) en la que se visitan 8 atracciones, no sirve para broncearse."{
+    const unaEACNQueSeVisitan8Atracciones=new ExcursionACiudad(idiomas=["español,guarani"],cantidadDeAtraccionesQueSeVanAVisitar=8)
+    assert.notThat(unaEACNQueSeVisitan8Atracciones.esParaBrocearse())
+  }
+  test "una excursión a ciudad tropical en la que se visitan 8 atracciones, lleva 5 días."{
+    const unaEACTQueSeVisitan8Atracciones=new ExcursionACiudadTropical(idiomas=["sueco","finlandes","ingles"],cantidadDeAtraccionesQueSeVanAVisitar=8)
+    assert.equals(5,unaEACTQueSeVisitan8Atracciones.cuantosDiasLlevaLaActividad()) 
+  }
+  test "una excursión a ciudad tropical en la que se visitan 8 atracciones, implica esfuerzo."{
+    const unaEACTQueSeVisitan8Atracciones=new ExcursionACiudadTropical(idiomas=["sueco","finlandes","ingles"],cantidadDeAtraccionesQueSeVanAVisitar=8)
+    assert.that(unaEACTQueSeVisitan8Atracciones.implicaEsfuerzo()) 
+  }
+  test "una excursión a ciudad tropical en la que se visitan 8 atracciones, sirve para broncearse."{
+    const unaEACTQueSeVisitan8Atracciones=new ExcursionACiudadTropical(idiomas=["sueco","finlandes","ingles"],cantidadDeAtraccionesQueSeVanAVisitar=8)
+    assert.that(unaEACTQueSeVisitan8Atracciones.esParaBrocearse()) 
+  }
+  test "una excursión a ciudad tropical en la que se visitan 10 atracciones, lleva 6 días."{
+    const unaEACTQueSeVisitan10Atracciones=new ExcursionACiudadTropical(idiomas=["sueco","finlandes","ingles","español","japones"],cantidadDeAtraccionesQueSeVanAVisitar=10)
+     assert.equals(6,unaEACTQueSeVisitan10Atracciones.cuantosDiasLlevaLaActividad())
+  }
+  test "una excursión a ciudad tropical en la que se visitan 10 atracciones, no implica esfuerzo."{
+    const unaEACTQueSeVisitan10Atracciones=new ExcursionACiudadTropical(idiomas=["sueco","finlandes","ingles","español","japones"],cantidadDeAtraccionesQueSeVanAVisitar=10)
+    assert.notThat(unaEACTQueSeVisitan10Atracciones.implicaEsfuerzo())
+  }
+  test "una excursión a ciudad tropical en la que se visitan 10 atracciones, sí sirve para broncearse."{
+    const unaEACTQueSeVisitan10Atracciones=new ExcursionACiudadTropical(idiomas=["sueco","finlandes","ingles","español","japones"],cantidadDeAtraccionesQueSeVanAVisitar=10)
+    assert.that(unaEACTQueSeVisitan10Atracciones.esParaBrocearse())
+  }
 }
