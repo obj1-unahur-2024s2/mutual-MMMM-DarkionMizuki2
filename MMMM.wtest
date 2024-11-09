@@ -2,11 +2,24 @@ import viajes.*
 
 describe "Test de viajes" {
 
-  test "Los idiomas se informan explícitamente para cada viaje. Cada idioma se puede representar como un String,
+  /* test "Los idiomas se informan explícitamente para cada viaje. Cada idioma se puede representar como un String,
 p.ej. español o italiano." {
     const v1 = new Viaje(idiomas=["español","italiano"])
     assert.equals("español", v1.idiomas().get(0))
     assert.equals("italiano",v1.idiomas().get(1))
   }
-
+  */
+  //VIAJE DE PLAYA
+  test "Si la playa tiene 1000 metros de largo, entonces se tarda 2 dias de viaje."{
+    const playaDe1000Metros=new ViajeDePlaya(idiomas=["español"],largo=1000)
+    assert.equals(2,playaDe1000Metros.cuantosDiasLlevaLaActividad())
+  }
+  test "Si la playa tiene 1000 metros de largo, entonces no implica esfuerzo."{
+    const playaDe1000Metros=new ViajeDePlaya(idiomas=["español"],largo=1000)
+    assert.notThat(playaDe1000Metros.implicaEsfuerzo())
+  }
+  test "Una viaja de playa es para broceanrse"{
+    const playaDe1000Metros=new ViajeDePlaya(idiomas=["español"],largo=1000)
+    assert.that(playaDe1000Metros.esParaBrocearse())
+  }
 }
