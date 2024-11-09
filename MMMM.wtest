@@ -1,0 +1,12 @@
+import viajes.*
+
+describe "Test de viajes" {
+
+  test "Los idiomas se informan explícitamente para cada viaje. Cada idioma se puede representar como un String,
+p.ej. español o italiano." {
+    const v1 = new Viaje(idiomas=["español","italiano"])
+    assert.equals("español", v1.idiomas().get(0))
+    assert.equals("italiano",v1.idiomas().get(1))
+  }
+
+}
