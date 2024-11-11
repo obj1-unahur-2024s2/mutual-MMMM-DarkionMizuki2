@@ -114,4 +114,20 @@ las excursiones a ciudad (tropical o no) se consideran interesantes si se cumple
 se recorren exactamente 5 atracciones (ni más ni menos, exactamente 5).
 las salidas de trekking se consideran interesantes si se cumple la condición general, y además en el lugar hay más de 140 
 días de sol por año.
+-----------------------------------------
+PARTE 6
+3. Clases de gimnasia
+Agregar al modelo las clases de gimnasia, que son otro tipo de actividad que la mutual ofrece a sus socios.
+
+Se deben resolver las mismas cuatro preguntas que para los viajes, que se responden así:
+
+idiomas: en las clases de gimnasia se usa únicamente español.
+Llevan 1 día.
+Siempre implican esfuerzo, y nunca sirven para broncearse.
 */
+class ClasesDeGimnasia inherits Viaje{
+  override method idiomas()=["español"]
+  override method cuantosDiasLlevaLaActividad()=1
+  override method implicaEsfuerzo()=true
+  override method esParaBrocearse()=false
+}

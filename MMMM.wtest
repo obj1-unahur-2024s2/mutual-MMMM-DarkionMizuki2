@@ -152,3 +152,22 @@ describe "Tests de Viajes Interesantes"{
     assert.that(unaSDTK.esInteresante())
   }
 }
+
+describe "Test de las Clases De Gimnasia"{
+  test "las clases de gimnasia se usa únicamente español."{
+    const unaCDG=new ClasesDeGimnasia(idiomas=["español"])
+    assert.equals(["español"],unaCDG.idiomas())
+  }
+  test "Las clases de gimanasia llevan 1 dia"{
+    const unaCDG=new ClasesDeGimnasia(idiomas=["español"])
+    assert.equals(1,unaCDG.cuantosDiasLlevaLaActividad())
+  }
+  test "las clases de gimnasia implica esfuerzo"{
+    const unaCDG=new ClasesDeGimnasia(idiomas=["español"])
+    assert.that(unaCDG.implicaEsfuerzo())
+  }
+  test "las clases de gimanasia nunca sirven para broceanrse"{
+    const unaCDG=new ClasesDeGimnasia(idiomas=["español"])
+    assert.notThat(unaCDG.esParaBrocearse())
+  }
+}
