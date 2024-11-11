@@ -131,3 +131,38 @@ class ClasesDeGimnasia inherits Viaje{
   override method implicaEsfuerzo()=true
   override method esParaBrocearse()=false
 }
+/*
+PARTE 7
+4. Socios, agregar actividad
+Agregar al modelo los socios. De cada socio se debe registrar qué actividades realizó, 
+que pueden ser viajes o clases de gimnasia. Para cada socio se establece también un máximo de actividades que puede hacer.
+
+Se debe resolver, para un socio:
+
+si es, o no, adorador del sol. La condición es que todas actividades que realizó sirven para broncearse.
+la colección de actividades esforzadas, o sea, las actividades que realizó que implican esfuerzo.
+registrar que realiza una actividad. Si ya llegó al máximo de actividades que puede hacer, hay que lanzar error.
+P.ej. tomemos a Roque, un socio que hizo 2 viajes a la playa, con longitudes de 1000 y 2000 metros respectivamente, 
+y que tiene un máximo de 2 actividades. En este caso:
+
+roque.esAdoradorDelSol() devuelve true.
+roque.actividadesEsforzadas() devuelve una colección que tiene solamente el viaje de 2000 metros de playa.
+si registramos que Roque realiza una clase de gimnasia, se debe generar un error.
+Si Ana es una socia que hizo dos viajes iguales a los que hizo Roque, pero tiene un máximo de 3 actividades, 
+entonces sí le podemos registrar una clase de gimnasia. Después de registrarla, obtenemos que Ana ya no es adoradora del 
+sol, y su colección de actividades esforzadas incluye al viaje de 2000 metros de playa y a la clase.
+*/
+class Socio{
+  const nombre
+  const actividadesQueRealizo //pueden ser viajes o clases de gimnasia
+  const maximoDeActividadesQuePuedeRealizar
+  method esAdoradorDelSol()=actividadesQueRealizo.all({unaA => unaA.esParaBrocearse()})
+  method actividadesEsforzadas()=actividadesQueRealizo.filter({unaA => unaA.implicaEsfuerzo()})
+  method registrarActividad(unaActividad){
+    if(actividadesQueRealizo.size()<maximoDeActividadesQuePuedeRealizar){
+      actividadesQueRealizo.add(unaActividad)
+    }else{
+      self.error(nombre+" no puede realizar mas de "+maximoDeActividadesQuePuedeRealizar+" viajes!")
+    }
+  }
+}

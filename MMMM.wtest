@@ -171,3 +171,31 @@ describe "Test de las Clases De Gimnasia"{
     assert.notThat(unaCDG.esParaBrocearse())
   }
 }
+
+describe "Test de los socios, agregar actividad"{
+  const roque = new Socio(nombre="Roque",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=2)
+  const ana = new Socio(nombre="Ana",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=3)
+  const v1 = new ViajeDePlaya(idiomas=[],largo=1000)
+  const v2 = new ViajeDePlaya(idiomas=[],largo=2000)
+  const v3 = new ClasesDeGimnasia(idiomas=[])
+  method initialize(){
+    roque.registrarActividad(v1)
+    roque.registrarActividad(v2)
+    //roque.registrarActividad(v3) -> lanza el error (CHEQUEADO)
+    ana.registrarActividad(v1)
+    ana.registrarActividad(v2)
+    ana.registrarActividad(v3)
+  }
+  test "Roque es adorador del sol"{
+    assert.that(roque.esAdoradorDelSol())
+  }
+  test "De las actividades forzadas de Roque devuelve el viaje de 2000 metros de playa."{
+    assert.equals([v2],roque.actividadesEsforzadas())
+  }
+  test "Ana no es adoradora del sol."{
+    assert.notThat(ana.esAdoradorDelSol())
+  }
+  test "La coleccion de actividades esforzadas de Ana incluye el viaje de playa de 2000 metros y la clase de gimnasia."{
+    assert.equals([v2,v3],ana.actividadesEsforzadas())
+  }
+}
