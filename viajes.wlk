@@ -156,6 +156,8 @@ class Socio{
   const nombre
   const actividadesQueRealizo //pueden ser viajes o clases de gimnasia
   const maximoDeActividadesQuePuedeRealizar
+  const edad
+  const idiomasQueHabla
   method esAdoradorDelSol()=actividadesQueRealizo.all({unaA => unaA.esParaBrocearse()})
   method actividadesEsforzadas()=actividadesQueRealizo.filter({unaA => unaA.implicaEsfuerzo()})
   method registrarActividad(unaActividad){
@@ -164,5 +166,38 @@ class Socio{
     }else{
       self.error(nombre+" no puede realizar mas de "+maximoDeActividadesQuePuedeRealizar+" viajes!")
     }
+  }
+}
+/*
+PARTE 8
+5. Actividades que le atraen a cada socio
+Se debe agregar al modelo la pregunta de si una actividad le atrae a un socio o no.
+Para ello, se debe agregar para cada socio, la edad, y la colección de idiomas que habla (en realidad, la edad se usa 
+recién en el punto siguiente, pero cuesta poco agregarla ahora).
+La condición depende del tipo de socio, de acuerdo a lo siguiente:
+
+si es un socio tranquilo, entonces la condición es que la actividad lleve 4 días o más.
+si es un socio coherente, entonces: si es adorador del sol, entonces la actividad debe servir para broncearse, 
+si no, debe implicar esfuerzo.
+si es un socio relajado, la condición es hablar al menos uno de los idiomas que se usan en la actividad. 
+P.ej. si un socio relajado habla español y quechua, entonces una actividad en español le va a atraer, una en quechua 
+y aymará también, una en francés e italiano no.
+*/
+class SocioTranquilo inherits Socio{
+  method leAtrae(unaActividad){
+    return unaActividad.cuantosDiasLlevaLaActividad()>=4
+  }
+}
+class SocioCoherente inherits Socio{
+  method leAtrae(unaActividad){
+    return if(self.esAdoradorDelSol()) unaActividad.esParaBrocearse() else unaActividad.implicaEsfuerzo()
+  }
+}
+
+class SocioRelajado inherits Socio{
+  method leAtrae(unaActividad){
+    return idiomasQueHabla.any({
+      unIQueHabla => unaActividad.idiomas().contains(unIQueHabla)
+    })
   }
 }

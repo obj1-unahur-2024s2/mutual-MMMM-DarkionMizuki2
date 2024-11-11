@@ -173,8 +173,8 @@ describe "Test de las Clases De Gimnasia"{
 }
 
 describe "Test de los socios, agregar actividad"{
-  const roque = new Socio(nombre="Roque",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=2)
-  const ana = new Socio(nombre="Ana",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=3)
+  const roque = new Socio(nombre="Roque",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=2,edad=18,idiomasQueHabla=["español"])
+  const ana = new Socio(nombre="Ana",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=3,edad=20,idiomasQueHabla=["español"])
   const v1 = new ViajeDePlaya(idiomas=[],largo=1000)
   const v2 = new ViajeDePlaya(idiomas=[],largo=2000)
   const v3 = new ClasesDeGimnasia(idiomas=[])
@@ -197,5 +197,52 @@ describe "Test de los socios, agregar actividad"{
   }
   test "La coleccion de actividades esforzadas de Ana incluye el viaje de playa de 2000 metros y la clase de gimnasia."{
     assert.equals([v2,v3],ana.actividadesEsforzadas())
+  }
+}
+
+describe "Test de las actividades que le atraen a cada socio"{
+  const ruberto = new SocioTranquilo(nombre="Ruberto",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=2,edad=18,idiomasQueHabla=["español"])
+  const aQueLleva5Dias = new SalidaDeTrekking(idiomas=["español"],kilometrosDeSenderos=250,diasDeSolEnElLugarQueSeVaHacer=130)
+  const aQueLleva3Dias=new ExcursionACiudadTropical(idiomas=["sueco"],cantidadDeAtraccionesQueSeVanAVisitar=4)
+  const vdp1 = new ViajeDePlaya(idiomas=["quechua","aymará"],largo=1000)
+  const vdp2 = new ViajeDePlaya(idiomas=["frances","italiano"],largo=2000)
+  const roque = new SocioCoherente(nombre="Roque",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=2,edad=18,idiomasQueHabla=["español"])
+  const unaCDG=new ClasesDeGimnasia(idiomas=["español"])
+  const ana = new SocioCoherente(nombre="Ana",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=3,edad=20,idiomasQueHabla=["español"])
+  const unaActividadQueNoImplicaEsfuerzo = new SalidaDeTrekking(idiomas=["chino","portugues","español"],kilometrosDeSenderos=50,diasDeSolEnElLugarQueSeVaHacer=240)
+  const santi = new SocioRelajado(nombre="Ruberto",actividadesQueRealizo=[],maximoDeActividadesQuePuedeRealizar=2,edad=18,idiomasQueHabla=["español","quechua"])
+  method initialize(){
+    roque.registrarActividad(vdp1)
+    roque.registrarActividad(vdp2)
+    ana.registrarActividad(vdp1)
+    ana.registrarActividad(vdp2)
+    ana.registrarActividad(unaCDG)
+  }
+  test "Una actividad que lleva 5 dias le atrae a ruberto que es un socio tranquilo" {
+    assert.that(ruberto.leAtrae(aQueLleva5Dias))
+  }
+  test "Una actividad que lleva 3 dias no le atrae a ruberto que es un socio tranquilo" {
+    assert.notThat(ruberto.leAtrae(aQueLleva3Dias))
+  }
+  test "a roque que le encanta el sol y es una socia coherente, una actividad de playa la atrae"{
+    assert.that(roque.leAtrae(vdp1))
+  }
+  test "a roque que le encanta el sol y es una socia coherente, una clase de gimnasia no la atrae"{
+    assert.notThat(roque.leAtrae(unaCDG))
+  }
+  test "a ana que no le encanta el sol y es una socia coherente, una clase de gimnasia la atrae"{
+    assert.that(ana.leAtrae(unaCDG))
+  }
+  test "a ana que no le encanta el sol y es una socia coherente, una actividad que no implique esfuerzo no la atrae"{
+    assert.notThat(ana.leAtrae(unaActividadQueNoImplicaEsfuerzo))
+  }
+  test "a santi que es un socio relajado que habla español y quechua, una actividad en español le va a atraer."{
+    assert.that(santi.leAtrae(aQueLleva5Dias))
+  }
+  test "a santi que habla español y quechua, una actividad en quechua y aymará le va a atraer."{
+    assert.that(santi.leAtrae(vdp1))
+  }
+  test "a santi que habla español y quechua, una actividad en frances e italiano no le va a atraer."{
+    assert.notThat(santi.leAtrae(vdp2))
   }
 }
