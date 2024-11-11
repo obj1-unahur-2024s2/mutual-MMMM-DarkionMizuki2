@@ -14,6 +14,7 @@ class Viaje{
   method implicaEsfuerzo()
   method esParaBrocearse()
   method cuantosDiasLlevaLaActividad()
+  method esInteresante()=idiomas.size()>1
 }
 
 /*
@@ -64,6 +65,7 @@ class ExcursionACiudad inherits Viaje{
   override method cuantosDiasLlevaLaActividad()=cantidadDeAtraccionesQueSeVanAVisitar/2
   override method implicaEsfuerzo()=valor.unNumero_estaEntre(cantidadDeAtraccionesQueSeVanAVisitar,5,8)
   override method esParaBrocearse()=false
+  override method esInteresante()=super() or cantidadDeAtraccionesQueSeVanAVisitar==5
 }
 
 class ExcursionACiudadTropical inherits ExcursionACiudad{
@@ -99,4 +101,17 @@ class SalidaDeTrekking inherits Viaje{
   override method esParaBrocearse()=(diasDeSolEnElLugarQueSeVaHacer>200 or 
                     valor.unNumero_estaEntre(diasDeSolEnElLugarQueSeVaHacer,100,200))
                     and kilometrosDeSenderos>120
+  override method esInteresante()=super() and diasDeSolEnElLugarQueSeVaHacer>140
 }
+/*
+PARTE 5
+2. Viajes interesantes
+Agregar al modelo la capacidad de preguntar si un viaje es interesante. Por lo general, 
+la condición es que se use más de un idioma, p.ej. quechua y aymara, o francés, alemán y húngaro. 
+Hay que contemplar estas variantes:
+
+las excursiones a ciudad (tropical o no) se consideran interesantes si se cumple la condición general, o bien, 
+se recorren exactamente 5 atracciones (ni más ni menos, exactamente 5).
+las salidas de trekking se consideran interesantes si se cumple la condición general, y además en el lugar hay más de 140 
+días de sol por año.
+*/

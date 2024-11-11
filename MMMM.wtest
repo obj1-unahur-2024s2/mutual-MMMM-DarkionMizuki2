@@ -121,3 +121,34 @@ p.ej. español o italiano." {
     assert.that(unaSDTK.esParaBrocearse())
   }
 }
+
+describe "Tests de Viajes Interesantes"{
+  test "si hay una excursion a ciudad normal y, tiene 5 atracciones y 2 diomas, es interesante."{
+    const unaEACN=new ExcursionACiudad(idiomas=["sueco","chino"],cantidadDeAtraccionesQueSeVanAVisitar=5)
+    assert.that(unaEACN.esInteresante())
+  }
+  test "si hay una excursion a ciudad tropical y, tiene 5 atracciones y 5 diomas, es interesante."{
+    const unaEACT=new ExcursionACiudad(idiomas=["sueco","chino","español","romano","indio"],cantidadDeAtraccionesQueSeVanAVisitar=5)
+    assert.that(unaEACT.esInteresante())
+  }
+  test "si hay una excursion a ciudad normal que se habla 1 idioma y tiene 3 atracciones, no es interesante."{
+    const unaEACN=new ExcursionACiudad(idiomas=["sueco"],cantidadDeAtraccionesQueSeVanAVisitar=3)
+    assert.notThat(unaEACN.esInteresante())
+  }
+  test "si hay una excursion a ciudad tropical que se habla 1 idioma y tiene 6 atracciones, no es interesante."{
+    const unaEACT=new ExcursionACiudad(idiomas=["indio"],cantidadDeAtraccionesQueSeVanAVisitar=6)
+    assert.notThat(unaEACT.esInteresante())
+  }
+  test "si una salida de trekking se habla 1 idioma, no es interesante."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["español"],kilometrosDeSenderos=250,diasDeSolEnElLugarQueSeVaHacer=130)
+    assert.notThat(unaSDTK.esInteresante())
+  }
+  test "si una salida de trekking se habla en 3 idiomas y hay 120 dias de sol por año, no es interesante."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["español","chino","ingles"],kilometrosDeSenderos=250,diasDeSolEnElLugarQueSeVaHacer=120)
+    assert.notThat(unaSDTK.esInteresante())
+  }
+  test "si una salidad de trekking se habla 2 idiomas y hay 200 dias de sol por año, es interesante"{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["portugues","ingles"],kilometrosDeSenderos=100,diasDeSolEnElLugarQueSeVaHacer=200)
+    assert.that(unaSDTK.esInteresante())
+  }
+}
