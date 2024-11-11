@@ -83,4 +83,41 @@ p.ej. español o italiano." {
     const unaEACTQueSeVisitan10Atracciones=new ExcursionACiudadTropical(idiomas=["sueco","finlandes","ingles","español","japones"],cantidadDeAtraccionesQueSeVanAVisitar=10)
     assert.that(unaEACTQueSeVisitan10Atracciones.esParaBrocearse())
   }
+  //SALIDA DE TREKKING
+  test "una salida de 100 kilómetros a un lugar con 130 días de sol por año: lleva 2 días."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["ingles","español"],kilometrosDeSenderos=100,diasDeSolEnElLugarQueSeVaHacer=130)
+    assert.equals(2,unaSDTK.cuantosDiasLlevaLaActividad())
+  }
+  test "una salida de 100 kilómetros a un lugar con 130 días de sol por año: implica esfuerzo."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["ingles","español"],kilometrosDeSenderos=100,diasDeSolEnElLugarQueSeVaHacer=130)
+    assert.that(unaSDTK.implicaEsfuerzo())
+  }
+  test "una salida de 100 kilómetros a un lugar con 130 días de sol por año: no sirve para broncearse."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["ingles","español"],kilometrosDeSenderos=100,diasDeSolEnElLugarQueSeVaHacer=130)
+    assert.notThat(unaSDTK.esParaBrocearse())
+  }
+  test "una salida de 50 kilómetros a un lugar con 240 días de sol por año: lleva 1 día."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["chino","portugues","español"],kilometrosDeSenderos=50,diasDeSolEnElLugarQueSeVaHacer=240)
+    assert.equals(1,unaSDTK.cuantosDiasLlevaLaActividad())
+  }
+  test "una salida de 50 kilómetros a un lugar con 240 días de sol por año: no implica esfuerzo."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["chino","portugues","español"],kilometrosDeSenderos=50,diasDeSolEnElLugarQueSeVaHacer=240)
+    assert.notThat(unaSDTK.implicaEsfuerzo())
+  }
+  test "una salida de 50 kilómetros a un lugar con 240 días de sol por año: sí sirve para broncearse."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["chino","portugues","español"],kilometrosDeSenderos=50,diasDeSolEnElLugarQueSeVaHacer=240)
+    assert.that(unaSDTK.esParaBrocearse())
+  }
+  test "una salida de 250 kilómetros a un lugar con 130 días de sol por año: lleva 5 días."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["español"],kilometrosDeSenderos=250,diasDeSolEnElLugarQueSeVaHacer=130)
+    assert.equals(5,unaSDTK.cuantosDiasLlevaLaActividad())
+  }
+  test "una salida de 250 kilómetros a un lugar con 130 días de sol por año: implica esfuerzo."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["español"],kilometrosDeSenderos=250,diasDeSolEnElLugarQueSeVaHacer=130)
+    assert.that(unaSDTK.implicaEsfuerzo())
+  }
+  test "una salida de 250 kilómetros a un lugar con 130 días de sol por año: sirve para broncearse."{
+    const unaSDTK=new SalidaDeTrekking(idiomas=["español"],kilometrosDeSenderos=250,diasDeSolEnElLugarQueSeVaHacer=130)
+    assert.that(unaSDTK.esParaBrocearse())
+  }
 }

@@ -76,3 +76,27 @@ object valor{
     return n>=a and n<=b
   }
 }
+/*
+PARTE 4
+Salida de trekking
+De cada salida de trekking se conoce cuántos kilómetros de senderos se van a recorrer caminando, 
+y cuántos días de sol por año tiene el lugar donde se va a hacer.
+Los días que lleva una salida se calculan como kilometros de senderos / 50. 
+Una salida implica esfuerzo si se recorren más de 80 kilómetros, y sirve para broncearse si en el lugar hay más de 200 días
+de sol por año, o hay entre 100 y 200, y se recorren más de 120 kilómetros.
+
+P.ej.
+
+una salida de 100 kilómetros a un lugar con 130 días de sol por año: lleva 2 días, implica esfuerzo, y no sirve para broncearse.
+una salida de 50 kilómetros a un lugar con 240 días de sol por año: lleva 1 día, no implica esfuerzo, y sí sirve para broncearse.
+una salida de 250 kilómetros a un lugar con 130 días de sol por año: lleva 5 días, implica esfuerzo, y sirve para broncearse.
+*/
+class SalidaDeTrekking inherits Viaje{
+  const kilometrosDeSenderos
+  const diasDeSolEnElLugarQueSeVaHacer //por año
+  override method cuantosDiasLlevaLaActividad()=kilometrosDeSenderos/50
+  override method implicaEsfuerzo()=kilometrosDeSenderos>80
+  override method esParaBrocearse()=(diasDeSolEnElLugarQueSeVaHacer>200 or 
+                    valor.unNumero_estaEntre(diasDeSolEnElLugarQueSeVaHacer,100,200))
+                    and kilometrosDeSenderos>120
+}
