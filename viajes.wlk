@@ -15,6 +15,7 @@ class Viaje{
   method esParaBrocearse()
   method cuantosDiasLlevaLaActividad()
   method esInteresante()=idiomas.size()>1
+  method esRecomendablePara(unSocio)=self.esInteresante() and unSocio.leAtrae(self) and not unSocio.actividadesQueRealizo().count({a => a==self})>1
 }
 
 /*
@@ -130,6 +131,7 @@ class ClasesDeGimnasia inherits Viaje{
   override method cuantosDiasLlevaLaActividad()=1
   override method implicaEsfuerzo()=true
   override method esParaBrocearse()=false
+  override method esRecomendablePara(unSocio)=unSocio.edad()>20 and unSocio.edad()<30
 }
 /*
 PARTE 7
@@ -154,9 +156,9 @@ sol, y su colección de actividades esforzadas incluye al viaje de 2000 metros d
 */
 class Socio{
   const nombre
-  const actividadesQueRealizo //pueden ser viajes o clases de gimnasia
+  const property actividadesQueRealizo //pueden ser viajes o clases de gimnasia
   const maximoDeActividadesQuePuedeRealizar
-  const edad
+  const property edad
   const idiomasQueHabla
   method esAdoradorDelSol()=actividadesQueRealizo.all({unaA => unaA.esParaBrocearse()})
   method actividadesEsforzadas()=actividadesQueRealizo.filter({unaA => unaA.implicaEsfuerzo()})
@@ -167,6 +169,7 @@ class Socio{
       self.error(nombre+" no puede realizar mas de "+maximoDeActividadesQuePuedeRealizar+" viajes!")
     }
   }
+  method hablaMasDeUnIdioma()=idiomasQueHabla.size()>1
 }
 /*
 PARTE 8
@@ -200,4 +203,45 @@ class SocioRelajado inherits Socio{
       unIQueHabla => unaActividad.idiomas().contains(unIQueHabla)
     })
   }
+}
+/*
+PARTE 9
+6. Actividades recomendadas para socios
+Agregar la posibilidad de preguntar, para una actividad, si es recomendada para un socio o no.
+
+Para los viajes, se deben cumplir tres condiciones: que la actividad sea interesante, que le atraiga al socio, y que el socio no haya realizado ya la misma actividad.
+
+Para las clases de gimnasia, la condición es que el socio tenga entre 20 y 30 años.
+----------------------
+PARTE 10
+Bonus: taller literario
+Agregar un nuevo tipo de actividad: el taller literario. De cada taller se registra sobre qué libros se trabaja. De cada libro se conoce: el idioma, la cantidad de páginas, y el nombre del autor.
+
+Para un taller literario tenemos:
+
+idiomas usados: los de los libros que se trabajan.
+días que lleva: la cantidad de libros más uno.
+implica esfuerzo: si incluye al menos un libro de más de 500 páginas, o bien todos los libros son del mismo autor, y hay más de uno.
+sirve para broncearse: nunca.
+es recomendado para un socio: la condición es que el socio hable más de un idioma.
+*/
+class TallerLiterario inherits Viaje{
+  const property librosQueTrabaja
+  override method idiomas()=librosQueTrabaja.map({l => l.idioma()})
+  override method cuantosDiasLlevaLaActividad()=librosQueTrabaja.size()+1
+  override method implicaEsfuerzo()=(self.tieneAlMenosUnLibroMasDe500Pag() or self.losLibrosSonDelMismoAutor() ) and
+    self.hayMasDeUnLibro()
+  method losLibrosSonDelMismoAutor()=librosQueTrabaja.forEach({
+    l1 => self.librosQueTrabaja().all({ l2 => l2.nombreDelAutor()==l1.nombreDelAutor() })
+  })
+  method tieneAlMenosUnLibroMasDe500Pag()=librosQueTrabaja.any({ unLibro => unLibro.cantidadDePaginas() > 500 })
+  method hayMasDeUnLibro()=librosQueTrabaja.size()>1
+  override method esParaBrocearse()=false
+  override method esRecomendablePara(unSocio)=unSocio.hablaMasDeUnIdioma()
+}
+
+class Libro{
+  const property idioma
+  const property cantidadDePaginas
+  const property nombreDelAutor
 }
